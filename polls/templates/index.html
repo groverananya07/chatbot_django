@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Chatbot</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>My Chatbot</h1>
+    </header>
+    <div class="container">
+        <div class="chatbox" id="chatbox">
+            <!-- Chat messages will appear here -->
+            <!-- {{ chat_history }} -->
+
+            <!-- Chat messages will appear here -->
+            {% for chat in chat_history %}
+                <div>
+                    <strong>{{ chat.role }}:</strong> {{ chat.message }} <br>
+                </div>
+            {% endfor %}
+
+        </div>
+        <!-- <div>
+            {{ chat_history }}
+        </div> -->
+    
+    
+        <div class="input-box">
+            <form method="post">
+                {% csrf_token %}
+
+                <p>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </p>
+                <button type="submit">Submit</button>
+            </form>
+            <!-- <input type="text" id="userInput" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button> -->
+        </div>
+    </div>
+
+    <!-- <div style="background-image: url('{% static 'images/chatbot-background.jpg' %}');"></div> -->
+    <!-- <div href= "{% static 'images/chatbot-backgroud.jpg' %}"></div> -->
+    <!-- <script>
+        function sendMessage() {
+            var userInput = document.getElementById('userInput').value;
+            if (userInput.trim() !== "") {
+                var chatbox = document.getElementById('chatbox');
+                var userMessage = document.createElement('div');
+                userMessage.textContent = "You: " + userInput;
+                chatbox.appendChild(userMessage);
+
+                // Clear the input field
+                document.getElementById('userInput').value = '';
+
+                // Scroll to the bottom of the chatbox
+                chatbox.scrollTop = chatbox.scrollHeight;
+
+                // Simulate a response from the chatbot
+                setTimeout(function() {
+                    var botMessage = document.createElement('div');
+                    botMessage.textContent = "Bot: " + "This is a simulated response.";
+                    chatbox.appendChild(botMessage);
+
+                    // Scroll to the bottom of the chatbox
+                    chatbox.scrollTop = chatbox.scrollHeight;
+                }, 1000);
+            }
+        }
+    </script> -->
+</body>
+</html>
